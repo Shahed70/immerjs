@@ -1,6 +1,7 @@
 import './App.css';
 import produce from 'immer';
 import { useCallback, useState } from 'react';
+import Person from './useImmer/Person';
 
 function App() {
 
@@ -54,6 +55,7 @@ function App() {
           }
           <button onClick={()=> handleToggle("Angular")}>Toggle</button>
           <button onClick={handleAdd}>AddData</button>
+          {/* <Person /> */}
     </div>
   );
 }
