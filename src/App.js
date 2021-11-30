@@ -4,8 +4,8 @@ import { useCallback, useState } from 'react';
 import Person from './useImmer/Person';
 import Todos from './useImmer/Todos';
 
-function App() {
 
+function App() {
   const [todos, setTodos] = useState([
     {
       id: "React",
@@ -19,47 +19,52 @@ function App() {
     }
   ]);
 
-  const handleToggle = useCallback((id) => {
-    console.log('Rendered1');
-      setTodos(
-          produce((draft) => {
-            const todo = draft.find((tod) => tod.id = id)
-            todo.done = !todo.done;
-            
-          })
-      )
-  }, []);
+  const handleToggle = (id) => {
 
-  const handleAdd = useCallback(() => {
-    console.log('Rendered2');
     setTodos(
-      produce((draft) => {
+      produce(todos, (draft) => {
+        let don = draft.find(tod => tod.id === id)
+        don.done = !don.done;
+      })
+    )
+  }
+
+  const handleAdd = () => {
+
+    setTodos(
+      produce(todos, (draft) => {
         draft.push({
-          id:"Angular",
-          title: "todo_" + Math.random(),
-          done:true
+          id: "Next",
+          title: "Try Next",
+          done: true
         })
       })
     )
-  }, []);
+
+  }
 
   return (
     <div className="App">
       <h1>Practice immer js</h1>
-          {/* {
-            todos?.map( (todo, index) => (
-              <ul key={index}>
-                <li> {todo.title} </li>
-                <li> {todo?.done ? "Task is done":"Task is not done"}</li>
-              </ul>
-            ))
-          }
-          <button onClick={()=> handleToggle("Angular")}>Toggle</button>
-          <button onClick={handleAdd}>AddData</button> */}
-          {/* <Person /> */}
-          <Todos />
+      {/* {
+
+        todos?.map((todo, index) => (
+          <ul key={index}>
+            <li> {todo.title} </li>
+            <li> {todo?.done ? "Task is done" : "Task is not done"}</li>
+          </ul>
+        ))
+
+      }
+      {
+        console.log('ok')
+      }
+      <button onClick={() => handleToggle("React")}>Toggle</button>
+      <button onClick={handleAdd}>AddData</button> */}
+      {/* <Person /> */}
+      <Todos />
     </div>
   );
 }
 
-export default App;
+export default App
