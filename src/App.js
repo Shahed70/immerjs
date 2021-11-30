@@ -2,6 +2,7 @@ import './App.css';
 import produce from 'immer';
 import { useCallback, useState } from 'react';
 import Person from './useImmer/Person';
+import Todos from './useImmer/Todos';
 
 function App() {
 
@@ -19,18 +20,18 @@ function App() {
   ]);
 
   const handleToggle = useCallback((id) => {
-    console.log('Rendered');
-    setTodos(
-      produce((draft) => {
-        const todo = draft.find( (todo) => todo.id === id);
-        todo.done = !todo.done;
-      })
-    )
-
+    console.log('Rendered1');
+      setTodos(
+          produce((draft) => {
+            const todo = draft.find((tod) => tod.id = id)
+            todo.done = !todo.done;
+            
+          })
+      )
   }, []);
 
   const handleAdd = useCallback(() => {
-    console.log('Rendered');
+    console.log('Rendered2');
     setTodos(
       produce((draft) => {
         draft.push({
@@ -45,7 +46,7 @@ function App() {
   return (
     <div className="App">
       <h1>Practice immer js</h1>
-          {
+          {/* {
             todos?.map( (todo, index) => (
               <ul key={index}>
                 <li> {todo.title} </li>
@@ -54,8 +55,9 @@ function App() {
             ))
           }
           <button onClick={()=> handleToggle("Angular")}>Toggle</button>
-          <button onClick={handleAdd}>AddData</button>
+          <button onClick={handleAdd}>AddData</button> */}
           {/* <Person /> */}
+          <Todos />
     </div>
   );
 }
